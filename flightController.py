@@ -19,15 +19,19 @@ def getCoef(x1, y1, x2, y2):
     
 
 def checkForIntersect(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2):
-    """v1 = (bx2-bx1)*(ay1-by1)-(by2-by1)*(ax1-bx1)
-    v2 = (bx2-bx1)*(ay2-by1)-(by2-by1)*(ax2-bx1)
-    v3 = (ax2-ax1)*(by1-ay1)-(ay2-ay1)*(bx1-ax1)
-    v4 = (ax2-ax1)*(by2-ay1)-(ay2-ay1)*(bx2-ax1)
-    if not v1*v1 < 0 or not v3*v4<0:
-        return False
+    crossX, crossY = 0, 0
+    k1, b1 = getCoef(ax1, ay1, ax2, ay2)
+    k2, b2 = getCoef(bx1, by1, bx2, by2)
+    if k1 == k2:
+        if b1 == b2:
+            print("2")
+        else:
+            print("1")
     else:
-        return True"""
-    print("1")
+        if b1 == b2:
+            crossX, crossY = 0, b1
+        else:
+            print("0")
 
 #[[xStart, yStart], [xEnd, yEnd], startTime, length]
 
