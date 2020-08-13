@@ -8,7 +8,14 @@ def sqr(a):
     return a * a
 
 def getCoef(x1, y1, x2, y2):
-    print("2")
+    if y2 > y1:
+        y1, y2 = y2, y1
+        x1, x2 = x2, x1
+    yDiff = y2 - y1
+    xDiff = x2 - x1
+    k = yDiff / xDiff
+    b = y1 - k * x1
+    return k, b
     
 
 def checkForIntersect(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2):
