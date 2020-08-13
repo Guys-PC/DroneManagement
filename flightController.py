@@ -20,6 +20,7 @@ def getCoef(x1, y1, x2, y2):
 
 def checkForIntersect(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2):
     crossX, crossY = 0, 0
+    xCross, yCross = 0, 0
     k1, b1 = getCoef(ax1, ay1, ax2, ay2)
     k2, b2 = getCoef(bx1, by1, bx2, by2)
     if k1 == k2:
@@ -31,7 +32,8 @@ def checkForIntersect(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2):
         if b1 == b2:
             crossX, crossY = 0, b1
         else:
-            print("0")
+            xCross = (b2 - b1) / (k1 - k2)
+            yCross = k1 * xCross + b1
 
 #[[xStart, yStart], [xEnd, yEnd], startTime, length]
 
