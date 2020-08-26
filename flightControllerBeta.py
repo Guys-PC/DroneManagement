@@ -8,12 +8,15 @@ def sqr(a):
     return a * a
 
 def getCoef(x1, y1, x2, y2):
-    if y2 > y1:
+    if y1 > y2:
         y1, y2 = y2, y1
         x1, x2 = x2, x1
-    yDiff = y2 - y1
-    xDiff = x2 - x1
-    k = yDiff / xDiff
+    yDiff = float(y2 - y1)
+    xDiff = float(x2 - x1)
+    if xDiff != 0:
+        k = float(yDiff) / float(xDiff)
+    else:
+        k = 0
     b = y1 - k * x1
     return k, b
     
@@ -54,8 +57,6 @@ def checkForIntersect(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2):
     if k1 == k2:
         if b1 == b2:
             isIntersecting = 2
-        else:
-            isIntersecting = 1
     else:
         #isIntersecting = 0
         if b1 == b2:
@@ -63,7 +64,9 @@ def checkForIntersect(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2):
             if (xCross >= aminX) and (xCross <= amaxX) and (yCross >= aminY) and (yCross <= amaxY) and (xCross >= bminX) and (xCross <= bmaxX) and (yCross >= bminY) and (yCross <= bmaxY):
                 isIntersecting = 0
         else:
-            xCross = (b2 - b1) / (k1 - k2)
+            bCalc = b2 - b1
+            kCalc = k1 - k2
+            xCross = bCalc / kCalc
             yCross = k1 * xCross + b1
             if (xCross >= aminX) and (xCross <= amaxX) and (yCross >= aminY) and (yCross <= amaxY) and (xCross >= bminX) and (xCross <= bmaxX) and (yCross >= bminY) and (yCross <= bmaxY):
                 isIntersecting = 0
@@ -139,8 +142,9 @@ by2New = random.randint(0, 100)
 
 isCrossing, x, y = checkForIntersect(ax1New, ay1New, ax2New, ay2New, bx1New, by1New, bx2New, by2New)
 
-graph1 = plt.plot([ax1New, ay1New], [ax2New, ay2New])
-graph2 = plt.plot([bx1New, by1New], [bx2New, by2New])
+graph1 = plt.plot([ax1New, ax2New], [ay1New, ay2New])
+graph2 = plt.plot([bx1New, bx2New], [by1New, by2New])
+point = plt.plot([x], [y], 'ro')
 
 if isCrossing == 0:
     print("true")
